@@ -1,6 +1,8 @@
- name = "dermaclinicsnearme"
-compatibility_date = "2025-05-05"
-compatibility_flags = ["nodejs_compat"]
+name = "dc-build"
 pages_build_output_dir = ".open-next"
+
+compatibility_date = "2025-05-05"
+compatibility_flags = ["nodejs_compat", "nodejs_compat_populate_process_env"]
+
 
 # .nvmrc controls the Node version; no NODE_VERSION set here.
