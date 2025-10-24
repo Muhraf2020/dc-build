@@ -1,5 +1,5 @@
 // app/clinics/[id]/page.tsx
-export const runtime = 'edge';
+// export const runtime = 'edge';
 export const dynamic = 'force-dynamic';
 
 
