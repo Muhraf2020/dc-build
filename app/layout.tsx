@@ -1,4 +1,4 @@
-export const runtime = 'nodejs';
+export const runtime = 'edge';
 
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
