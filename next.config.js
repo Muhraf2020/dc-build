@@ -24,7 +24,6 @@ const nextConfig = {
   experimental: {
     serverExternalPackages: [
       '@supabase/supabase-js',
-      '@supabase/supabase-js/edge',
     ],
   },
 };
