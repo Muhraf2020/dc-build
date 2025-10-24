@@ -1,12 +1,17 @@
-export const runtime = 'nodejs';
+// app/clinics/[id]/page.tsx
+export const runtime = 'edge';
+export const dynamic = 'force-dynamic';
+
 
 // app/clinics/[id]/page.tsx
-import { createClient } from '@supabase/supabase-js';
+import { createSupabaseClient } from '@/lib/supabase';
 import { Clinic } from '@/lib/dataTypes';
 import { getPhotoUrl } from '@/lib/googlePlaces';
 import Link from 'next/link';
 import ClinicBanner from '@/components/ClinicBanner';
 import { notFound } from 'next/navigation';
+
+
 
 // ----------------------
 // 1. Updated for Next.js 15 - params is now a Promise
@@ -19,10 +24,7 @@ interface ClinicPageProps {
 
 // Server-side data fetching
 async function getClinic(id: string): Promise<Clinic | null> {
-  const supabase = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-  );
+  const supabase = createSupabaseClient();
 
   const { data, error } = await supabase
     .from('clinics')
