@@ -1,4 +1,5 @@
-export const runtime = 'edge';
+// Use Node runtime on Cloudflare; edge runtime is not supported by default:contentReference[oaicite:1]{index=1}.
+export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 
 // app/api/photo/route.ts
