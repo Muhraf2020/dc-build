@@ -1,5 +1,5 @@
 // Use Node runtime on Cloudflare; edge runtime is not supported by default:contentReference[oaicite:1]{index=1}.
-export const runtime = 'nodejs';
+export const runtime = 'edge';
 export const dynamic = 'force-dynamic';
 
 // app/api/clinics/route.ts 
