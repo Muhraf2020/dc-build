@@ -1,0 +1,43 @@
+name: Build & Deploy to Cloudflare Pages (OpenNext)
+
+on:
+  push:
+    branches: [ "main" ]   # deploy prod when main changes
+  workflow_dispatch: {}
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    env:
+      # Inject ONLY for the build so Next.js can inline them
+      NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+      NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+      NEXT_PUBLIC_GOOGLE_MAPS_API_KEY: ${{ secrets.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY }}
+      GOOGLE_PLACES_API_KEY: ${{ secrets.GOOGLE_PLACES_API_KEY }}
+
+      # Cloudflare deploy auth
+      CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
+      CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+      CF_PAGES_PROJECT: dc-build   # or: ${{ secrets.CF_PAGES_PROJECT }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Use Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+
+      - name: Install deps
+        run: npm ci
+
+      - name: Build (OpenNext → .open-next)
+        run: npm run pages:build
+        # your package.json already has: "pages:build": "npx @opennextjs/cloudflare@latest build && cp .open-next/worker.js .open-next/_worker.js"
+
+      - name: Deploy to Cloudflare Pages
+        run: npx wrangler pages deploy .open-next --project-name "$CF_PAGES_PROJECT" --branch main
+        # For preview deployments, you’d use --branch <branch-name>
