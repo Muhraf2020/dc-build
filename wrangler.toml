@@ -3,12 +3,4 @@ compatibility_date = "2025-05-05"
 compatibility_flags = ["nodejs_compat"]
 pages_build_output_dir = ".open-next"
 
-[vars]
-
-
-# Environment variables will be set via Cloudflare dashboard
-# Add the following as environment variables in Cloudflare Pages:
-# NEXT_PUBLIC_SUPABASE_URL
-# NEXT_PUBLIC_SUPABASE_ANON_KEY
-# GOOGLE_PLACES_API_KEY (if needed)
-# SUPABASE_SERVICE_KEY (if needed) 
+# .nvmrc controls the Node version; no NODE_VERSION set here.
