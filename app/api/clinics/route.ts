@@ -3,7 +3,8 @@ export const dynamic = 'force-dynamic';
 
 // app/api/clinics/route.ts 
 import { NextResponse } from 'next/server';
-import { createClient } from '@supabase/supabase-js';
+import { createSupabaseClient } from '@/lib/supabase';
+
 import { Clinic } from '@/lib/dataTypes';
 
 // US State to Timezone mapping
@@ -161,11 +162,8 @@ function calculateOpenNowFromWeekdayText(
  * Fetches all clinics from Supabase
  */
 export async function GET(request: Request) {
-  // ✅ Initialize Supabase client INSIDE the function (at runtime, not build time)
-  const supabase = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-  );
+  // ✅ Initialize Supabase client INSIDE the function (Edge/Workers-safe)
+  const supabase = createSupabaseClient();
 
   try {
     const { searchParams } = new URL(request.url);
