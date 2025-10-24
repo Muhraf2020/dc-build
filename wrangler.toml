@@ -4,7 +4,7 @@ compatibility_flags = ["nodejs_compat"]
 pages_build_output_dir = ".open-next"
 
 [vars]
-NODE_VERSION = "20.20.0"
+
 
 # Environment variables will be set via Cloudflare dashboard
 # Add the following as environment variables in Cloudflare Pages:
