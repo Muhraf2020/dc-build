@@ -1,5 +1,6 @@
 // Use Node runtime on Cloudflare; edge runtime is not supported by default:contentReference[oaicite:1]{index=1}.
-export const runtime = 'edge';
+// export const runtime = 'edge';
+export const dynamic = 'force-dynamic';
 
 import { NextResponse } from 'next/server';
 import { searchDermClinics, geocodeAddress } from '@/lib/googlePlaces';
